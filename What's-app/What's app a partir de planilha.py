@@ -13,7 +13,8 @@ driver = webdriver.Chrome(ChromeDriverManager().install())
 
 driver.get("https://web.whatsapp.com/")
 
-sleep(10)
+input("Pressione enter apos verificar o QR code")
+
 def enviar_mensagem(contato, mensagem):
     new_chat = driver.find_element_by_xpath(NEW_CHAT)
     new_chat.click()
@@ -35,4 +36,5 @@ def enviar_mensagem(contato, mensagem):
 planilha = pd.read_excel('C:/Users/Thiago/Desktop/Contatos.xlsx') #Lista de contatos com mensagem 
 print(planilha.head())
 for cont in planilha['Nome'].unique():
-    enviar_mensagem(cont, planilha.loc[planilha['Nome']== cont, 'Mensagem']) #comando para buscar dentro da planilha
+    mensagem = planilha.loc[planilha['Nome']== cont, 'Mensagem'].values
+    enviar_mensagem(cont, mensagem) #comando para buscar dentro da planilha
